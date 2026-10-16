@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://meld.dev/schemas/recipe.v1.json",
+  "title": "Meld interface recipe",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "rationale", "context", "blocks", "navigation", "updatedAt"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "rationale": { "type": "string", "minLength": 1 },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "density", "connectivity", "region", "oneHanded", "highContrast", "language"],
+      "properties": {
+        "role": { "enum": ["resident", "responder", "coordinator"] },
+        "density": { "enum": ["calm", "compact", "command"] },
+        "connectivity": { "enum": ["online", "fragile", "offline"] },
+        "region": { "enum": ["north", "riverside", "all"] },
+        "oneHanded": { "type": "boolean" },
+        "highContrast": { "type": "boolean" },
+        "language": { "enum": ["en", "zh"] }
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "title", "capability", "importance", "span"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "type": {
+            "enum": ["safety-hero", "nearby-shelters", "personal-checklist", "field-route", "triage-stack", "quick-report", "situation-map", "metrics-strip", "resource-board", "activity-feed"]
+          },
+          "title": { "type": "string", "minLength": 1 },
+          "capability": {
+            "enum": ["read_incidents", "read_resources", "read_shelters", "update_request", "dispatch_team", "broadcast_alert"]
+          },
+          "importance": { "type": "integer", "minimum": 0, "maximum": 10 },
+          "span": { "enum": [1, 2, 3] }
+        }
+      }
+    },
+    "navigation": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["overview", "map", "requests", "people"] }
+    },
+    "updatedAt": { "type": "string" }
+  }
+}

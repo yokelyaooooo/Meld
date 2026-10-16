@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "mode": "read",
+  "density": "compact",
+  "accent": "jade",
+  "lens": "high-confidence",
+  "sourceSort": "year-desc",
+  "inspector": false,
+  "surfaceTitle": "Exam review",
+  "rationale": "Prioritize recent, high-confidence evidence for a focused recall session.",
+  "guidance": [
+    "Recall each claim before revealing the evidence.",
+    "Mark any boundary condition you cannot explain from memory."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://meld.dev/schemas/recipe.v1.json",
+  "id": "field-medical-offline",
+  "name": "Medical field route",
+  "rationale": "Prioritize urgent medical requests for a one-handed responder with no reliable connection.",
+  "context": {
+    "role": "responder",
+    "density": "compact",
+    "connectivity": "offline",
+    "region": "north",
+    "oneHanded": true,
+    "highContrast": true,
+    "language": "en"
+  },
+  "blocks": [
+    {
+      "id": "medical-priority",
+      "type": "triage-stack",
+      "title": "Medical priority",
+      "capability": "read_incidents",
+      "importance": 10,
+      "span": 3
+    },
+    {
+      "id": "field-route",
+      "type": "field-route",
+      "title": "Next three stops",
+      "capability": "read_incidents",
+      "importance": 9,
+      "span": 2
+    },
+    {
+      "id": "quick-report",
+      "type": "quick-report",
+      "title": "Log outcome",
+      "capability": "update_request",
+      "importance": 8,
+      "span": 1
+    }
+  ],
+  "navigation": ["requests", "map", "people"],
+  "updatedAt": "2026-10-16T00:00:00.000Z"
+}

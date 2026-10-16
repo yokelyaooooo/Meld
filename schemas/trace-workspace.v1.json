@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://meld.dev/schemas/trace-workspace.v1.json",
+  "title": "Meld Trace workspace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "title", "question", "thesis", "sources", "evidence", "activeSourceId", "updatedAt"],
+  "properties": {
+    "version": { "const": 1 },
+    "title": { "type": "string" },
+    "question": { "type": "string" },
+    "thesis": { "type": "string" },
+    "activeSourceId": { "type": "string" },
+    "updatedAt": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "authors", "year", "url", "summary", "tags", "notes", "color"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "authors": { "type": "string" },
+          "year": { "type": "integer" },
+          "url": { "type": "string" },
+          "summary": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "string" },
+          "color": { "type": "string" }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "sourceId", "theme", "claim", "location", "stance", "confidence", "included"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "sourceId": { "type": "string", "minLength": 1 },
+          "theme": { "type": "string", "minLength": 1 },
+          "claim": { "type": "string", "minLength": 1 },
+          "location": { "type": "string" },
+          "stance": { "enum": ["supports", "challenges", "context"] },
+          "confidence": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "included": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}
